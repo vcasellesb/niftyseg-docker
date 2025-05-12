@@ -1,17 +1,13 @@
 FROM ubuntu:18.04
 RUN apt-get update && \
     apt-get install -y cmake cmake-curses-gui \
-    gcc g++ libeigen3-dev
+    gcc g++ libeigen3-dev git
 
-COPY src/ /niftyseg/src
+RUN git clone https://github.com/KCL-BMEIS/NiftySeg.git
 
-RUN mkdir /niftyseg/build /niftyseg/install
+WORKDIR /NiftySeg/build
 
-WORKDIR /niftyseg/build
-
-RUN CXX=/usr/bin/g++ CC=/usr/bin/gcc cmake ../src/ && \
+RUN CXX=/usr/bin/g++ CC=/usr/bin/gcc cmake ../ && \
     make && make install
 
-WORKDIR /
-
-RUN rm -rf /niftyseg
+RUN rm -rf /NiftySeg
