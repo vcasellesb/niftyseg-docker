@@ -1,0 +1,3 @@
+[submodule "niftyseg-git"]
+	path = niftyseg-git
+	url = ./niftyseg-git
